@@ -1,7 +1,7 @@
 {
-  "name": "mobx-react-boilerplate",
+  "name": "shuai-typing-exercise",
   "version": "1.0.0",
-  "description": "Boilerplate for MobX + React project with JSX, ES6 and decorator compilation",
+  "description": "Custom typing exercise",
   "scripts": {
     "start": "webpack-dev-server --hot --open",
     "build": "webpack",
@@ -9,21 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/mobxjs/mobx-react-boilerplate.git"
+    "url": "https://github.com/mashuaihh/TypingExercise.git"
   },
   "keywords": [
     "react",
     "reactjs",
     "boilerplate",
-    "mobx",
-    "starter-kit"
+    "mobx"
   ],
-  "author": "Michel Weststrate <mweststrate@gmail.com> (http://github.com/mweststrate)",
+  "author": "Shuai <mashuaihh@hotmail.com> (https://github.com/mashuaihh)",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/mobxjs/mobx/issues"
-  },
-  "homepage": "http://mobxjs.github.com/mobx",
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
