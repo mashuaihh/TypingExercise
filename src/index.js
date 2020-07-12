@@ -2,12 +2,12 @@ import React from "react";
 import { render } from "react-dom";
 import DevTools from "mobx-react-devtools";
 
-import InputArea from "./components/InputArea";
+import Exercise from "./components/Exercise";
 
 render(
-  <div>
+  <React.Fragment>
     <DevTools />
-    <InputArea />
-  </div>,
+    <Exercise />
+  </React.Fragment>,
   document.getElementById("root")
 );

@@ -38,7 +38,7 @@ export default class TypingArea extends React.Component {
     );
 
     return (
-      <div>
+      <div style={typingStyle}>
         {spans}
         <KeyboardEventHandler
           handleKeys={keys}
@@ -51,6 +51,12 @@ export default class TypingArea extends React.Component {
   keyPressHandler = (key) => {
     if (key === 'shift+quote') {
       key = '"';
+    } else if (key === 'shift+-') {
+      key = '_';
+    } else if (key === 'shift+/') {
+      key = '?';
+    } else if (key === 'shift+;') {
+      key = ':';
     } else if (key === 'space') { 
       key = ' ';
     } else {
@@ -69,7 +75,19 @@ const keys = (() => {
   const letters = Array.from('abcdefghijklmnopqrstuvwxyz');
   return letters.reduce(
     (keys, currentLetter) => keys.concat([currentLetter, `shift+${currentLetter}`]),
-    [',', 'space', '.', 'shift+quote', 'quote']
+    [
+      ',',
+      'space',
+      '.',
+      ';',
+      'shift+;',
+      'shift+quote',
+      'quote',
+      '/',
+      'shift+/',
+      '-',
+      'shift+-',
+    ]
   );
 })();
 
@@ -81,5 +99,10 @@ const beforeStyle = {
 const afterStyle = {
   color: 'black',
   fontWeight: 'bold',
-  fontSize: '2em',
+  fontSize: '2em'
+}
+const typingStyle = {
+  flex: '1',
+  borderStyle: 'solid',
+  fontFamily: 'monospace'
 }
