@@ -1,4 +1,4 @@
-mobx-react-boilerplate
+Shuai's Typing Exercise
 =====================
 
 A basic typing exercise application that:
