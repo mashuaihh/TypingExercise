@@ -4,7 +4,9 @@ export default class WritingMaterial extends React.Component {
   constructor() {
     super();
     this.state = {
-      texts: []
+      texts: [],
+      googleDocId: '',
+      isSignedIn: false
     };
   }
 
@@ -15,14 +17,25 @@ export default class WritingMaterial extends React.Component {
   render() {
     return (
       <div>
-        <h2>Writing Material</h2>
         { this.state.texts.length > 0 && 
           this.state.texts.map((text, idx) => 
           <p key={idx} onClick={() => this.props.handleTextSelection(text)}>{text}</p>
         )}
+        <div>
+          <input 
+            style={inputStyle}
+            value={this.state.googleDocId}
+            onChange={this.handleChange}
+            placeholder="Google Doc ID" />
+          <button onClick={this.fetchGoogleDoc}>Fetch Google Doc</button>
+        </div>
         <button onClick={this.handleAuthClick}>Sign in Google</button>
       </div>
     );
+  }
+
+  handleChange = (event) => {
+    this.setState({googleDocId: event.target.value});  
   }
 
   handleAuthClick = (_) => {
@@ -60,7 +73,6 @@ export default class WritingMaterial extends React.Component {
 
   initClient = () => {
     gapi.client.init({
-      // apiKey: "AIzaSyAJ4gob1Kicr8LeNOUaole1bhBGihKUMQM",
       clientId: "981519938212-ua9b7c33d7n5ahr8ub94hefh2bnoav8v.apps.googleusercontent.com",
       scope: "https://www.googleapis.com/auth/documents.readonly"
     }).then(() => {
@@ -71,22 +83,34 @@ export default class WritingMaterial extends React.Component {
   }
 
   updateSigninStatus = (isSignedIn) => {
-    const documentId = "YOUR_DOCUMENTID";
-    if (isSignedIn) {
-      return gapi.client.request({
-        path: `https://docs.googleapis.com/v1/documents/${documentId}`,
-      }).then((response) => {
-        console.log(response.result);
-        const texts = response.result.body.content
-          .filter(content => !!content.paragraph)
-          .filter(content => content.paragraph.elements[0].textRun.content.length > 1)
-          .map(content => content.paragraph.elements[0].textRun.content.trim());
-        this.setState({
-          texts
-        });
-      }, function(reason) {
-        console.log('Error: ' + reason.result.error.message);
-      });
-    }
+    this.setState({
+      isSignedIn
+    });
   }
+
+  fetchGoogleDoc = () => {
+    if (!this.state.isSignedIn || this.state.googleDocId.length === 0) {
+      alert("Please sign in first");
+      return;
+    }
+    gapi.client.request({
+      path: `https://docs.googleapis.com/v1/documents/${this.state.googleDocId}`,
+    }).then((response) => {
+      console.log(response.result);
+      const texts = response.result.body.content
+        .filter(content => !!content.paragraph)
+        .filter(content => content.paragraph.elements[0].textRun.content.length > 1)
+        .map(content => content.paragraph.elements[0].textRun.content.trim());
+      this.setState({
+        texts
+      });
+    }, (error) => {
+      console.log(`Failed to fetch the Google Doc: ${this.state.googleDocId}`);
+      console.log(error);
+    });  
+  }
+}
+
+const inputStyle = {
+  width: '30em'
 }
