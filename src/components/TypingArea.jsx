@@ -49,7 +49,7 @@ export default class TypingArea extends React.Component {
 
   // key can be 'a' or 'shitf+a'
   keyPressHandler = (key) => {
-    if (key === 'shift+quote') {
+    if (key === 'shift+\'') {
       key = '"';
     } else if (key === 'shift+-') {
       key = '_';
@@ -81,8 +81,10 @@ const keys = (() => {
       '.',
       ';',
       'shift+;',
-      'shift+quote',
-      'quote',
+      // quote
+      '\'',
+      'shift+\'',
+      // slash
       '/',
       'shift+/',
       '-',
@@ -93,12 +95,10 @@ const keys = (() => {
 
 const beforeStyle = {
   color: 'grey',
-  fontWeight: 'bold',
   fontSize: '2em',
 }
 const afterStyle = {
   color: 'black',
-  fontWeight: 'bold',
   fontSize: '2em'
 }
 const typingStyle = {
