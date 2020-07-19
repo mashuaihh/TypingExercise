@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TypingArea from "./TypingArea";
+import WritingMaterial from "./WritingMaterial";
 
 export default class Exercise extends React.Component {
   constructor() {
@@ -13,6 +14,8 @@ export default class Exercise extends React.Component {
   render() {
     return (
       <div style={typingAreaStyle}>
+        <h2>Typing Exercise</h2>
+        <WritingMaterial handleTextSelection={this.handleTextSelection} />
         {
           this.state.isTyping ?
           <React.Fragment>
@@ -28,6 +31,13 @@ export default class Exercise extends React.Component {
     );
   }
 
+  handleTextSelection = (text) => {
+    this.setState({
+      text: text + ' ',
+      isTyping: true
+    });
+  }
+
   handleChange = (event) => {
     this.setState({text: event.target.value});  
   }
@@ -37,7 +47,9 @@ export default class Exercise extends React.Component {
     if (this.state.text.length === 0) {
       return;
     }
+    const stateText = this.state.text;
     this.setState({
+      text: stateText.charAt(stateText.length - 1) === ' ' ? stateText : stateText + ' ',
       isTyping: true
     });
   }
