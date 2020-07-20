@@ -9,11 +9,11 @@ export default class TypingArea extends React.Component {
     };
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevProps) {
     if (this.props.text.length === 0) {
       return;
     }
-    if (this.state.currentIndex === this.props.text.length) {
+    if (this.state.currentIndex === this.props.text.length || prevProps.text !== this.props.text) {
       this.setState({
         currentIndex: 0
       });

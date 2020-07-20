@@ -23,13 +23,14 @@ export default class WritingMaterial extends React.Component {
         )}
         <div>
           <input 
+            autoComplete
             style={inputStyle}
             value={this.state.googleDocId}
             onChange={this.handleChange}
             placeholder="Google Doc ID" />
           <button onClick={this.fetchGoogleDoc}>Fetch Google Doc</button>
+          <button onClick={this.handleAuthClick}>Sign in Google</button>
         </div>
-        <button onClick={this.handleAuthClick}>Sign in Google</button>
       </div>
     );
   }
