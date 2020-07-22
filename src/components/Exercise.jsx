@@ -23,8 +23,10 @@ export default class Exercise extends React.Component {
             <button onClick={this.handleClear}>Clear</button>
           </React.Fragment> :
           <React.Fragment>
-            <textarea style={textAreaStyle} value={this.state.text} onChange={this.handleChange} />
-            <button onClick={this.handleSubmit}>Submit</button>
+            <div style={outerDivStyle}>
+              <textarea style={textAreaStyle} value={this.state.text} onChange={this.handleChange} />
+              <button onClick={this.handleSubmit}>Submit</button>
+            </div>
           </React.Fragment>
         }
       </div>
@@ -66,6 +68,11 @@ const typingAreaStyle = {
   display: 'flex',
   flexDirection: 'column',
   height: '100%'
+}
+const outerDivStyle = {
+  display: 'flex',
+  flexDirection: 'column',
+  flex: '1'
 }
 const textAreaStyle = {
   flex: '1',

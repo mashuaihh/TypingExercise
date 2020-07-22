@@ -23,7 +23,6 @@ export default class WritingMaterial extends React.Component {
         )}
         <div>
           <input 
-            autoComplete
             style={inputStyle}
             value={this.state.googleDocId}
             onChange={this.handleChange}

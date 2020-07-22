@@ -51,6 +51,8 @@ export default class TypingArea extends React.Component {
   keyPressHandler = (key) => {
     if (key === 'shift+\'') {
       key = '"';
+    } else if (key === 'shift+1') {
+      key = '!';
     } else if (key === 'shift+-') {
       key = '_';
     } else if (key === 'shift+/') {
@@ -89,6 +91,8 @@ const keys = (() => {
       'shift+/',
       '-',
       'shift+-',
+      '1',
+      'shift+1'
     ]
   );
 })();
